@@ -1,7 +1,8 @@
-# Modern Dockerfile with UV and BuildKit optimizations
+# Modern Dockerfile with UV, Micromamba, and BuildKit optimizations
 # syntax=docker/dockerfile:1.4
 
-# Multi-stage build for optimal caching and size
+# Why micromamba? It's minimal (90% smaller than conda), fast startup, no bloat
+# Strategy: mamba for local dev (full features), micromamba for containers (minimal size)
 FROM mambaorg/micromamba:1.5.1 as base
 
 # Set environment variables for optimal performance
@@ -11,6 +12,7 @@ ENV PYTHONUNBUFFERED=1 \
     PIP_DISABLE_PIP_VERSION_CHECK=1
 
 # Install UV for blazing fast package management
+# Micromamba + UV = fastest possible Python environment setup
 RUN micromamba install -y -n base -c conda-forge python=3.12 && \
     micromamba clean --all --yes && \
     pip install uv
@@ -77,3 +79,8 @@ FROM development as linting
 RUN ruff check . && \
     ruff format --check . && \
     mypy app/
+
+# Size comparison:
+# conda/mamba base image: ~1.2GB
+# micromamba base image: ~120MB (90% smaller!)
+# Result: Faster builds, smaller images, quicker deployments
