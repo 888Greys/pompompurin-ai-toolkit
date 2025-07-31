@@ -1,370 +1,412 @@
-# PRP (Product Requirement prompts)
+# 🍮 PompomPurin's AI Engineering Toolkit
+## PRP (Product Requirement Prompts) Framework
 
-- A collection of prompts i use in my every day work
+*Sweet AI-assisted development that's as delightful as pudding!*
 
-## Video Walkthrough
+[![GitHub Stars](https://img.shields.io/github/stars/pompompurin/pompompurin-ai-toolkit?style=social)](https://github.com/pompompurin/pompompurin-ai-toolkit)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](http://makeapullrequest.com)
 
-👉 https://www.youtube.com/watch?v=KVOZ9s1S9Gk&lc=UgzfwxvFjo6pKEyPo1R4AaABAg
+> **"Making AI development as smooth and sweet as Pompompurin's favorite pudding!"** 🍮✨
 
-### ☕ Support This Work
-
-**Found value in these resources?**
-
-👉 **Buy me a coffee:** https://coff.ee/wirasm
-
-I spent a considerable amount of time creating these resources and prompts. If you find value in this project, please consider buying me a coffee to support my work.
-
-That will help me maintain and improve the resources available for free
+A comprehensive collection of AI engineering resources and prompts for building production-ready software with **Claude Code**, **Qodo AI**, and other AI development tools. This toolkit enables **one-pass implementation success** through structured prompts and comprehensive validation.
 
 ---
 
-### 🎯 Transform Your Team with AI Engineering Workshops
+## 🌟 What Makes This Special?
 
-**Ready to move beyond toy demos to production-ready AI systems?**
+### 🎯 **PRP Methodology**
+**PRP = PRD + Curated Codebase Intelligence + Agent Runbook**
 
-👉 **Book a workshop:** https://www.rasmuswiding.com/
+The minimum viable packet an AI needs to ship production-ready code on the first pass.
 
-✅ **What you'll get:**
+### 🚀 **28+ Pre-configured Commands**
+Ready-to-use slash commands for Claude Code covering every aspect of development.
 
-- Put your team on a path to become AI power users
-- Learn the exact PRP methodology used by top engineering teams
-- Hands-on training with Claude Code, PRPs, and real codebases
-- From beginner to advanced AI engineering workshops for teams and individuals
+### 🧪 **Validation-First Approach**
+Every PRP includes executable validation loops ensuring production quality.
 
-💡 **Perfect for:** Engineering teams, Product teams, and developers who want AI that actually works in production
+### 📚 **Comprehensive Documentation**
+Curated AI documentation, templates, and real-world examples.
 
-Let's talk!
-Contact me directly at rasmus@widinglabs.com
+---
 
-# AI Engineering Resources for Claude Code
+## 🚀 Quick Start (5 Minutes)
 
-A comprehensive library of assets and context engineering for Agentic Engineering, optimized for Claude Code. This repository provides the Product Requirement Prompt (PRP) methodology, pre-configured commands, and extensive documentation to enable AI-assisted development that delivers production-ready code on the first pass.
+### Option 1: Use with Your Existing Project
+```bash
+# Clone the toolkit
+git clone https://github.com/pompompurin/pompompurin-ai-toolkit.git
+cd pompompurin-ai-toolkit
 
-## What is PRP?
+# Copy commands to your project
+cp -r .claude/commands /path/to/your-project/.claude/
+cp -r PRPs/templates /path/to/your-project/PRPs/
 
-Product Requirement Prompt (PRP)
+# Start using slash commands in Claude Code!
+```
 
-## In short
+### Option 2: Start Fresh with the Toolkit
+```bash
+# Clone and enter
+git clone https://github.com/pompompurin/pompompurin-ai-toolkit.git
+cd pompompurin-ai-toolkit
 
-A PRP is PRD + curated codebase intelligence + agent/runbook—the minimum viable packet an AI needs to plausibly ship production-ready code on the first pass.
+# Install dependencies (for Python projects)
+pip install -r requirements.txt  # or use uv/poetry
 
-Product Requirement Prompt (PRP) is a structured prompt methodology first established in summer 2024 with context engineering at heart. A PRP supplies an AI coding agent with everything it needs to deliver a vertical slice of working software—no more, no less.
+# Open in Claude Code and start building!
+```
 
-### How PRP Differs from Traditional PRD
+### Option 3: Try the Demo Project
+```bash
+# Navigate to the example Task API
+cd task-api
 
-A traditional PRD clarifies what the product must do and why customers need it, but deliberately avoids how it will be built.
+# Install dependencies
+pip install -r requirements.txt
 
-A PRP keeps the goal and justification sections of a PRD yet adds three AI-critical layers:
+# Run the API
+uvicorn app.main:app --reload
 
-### Context
+# Visit http://localhost:8000/docs to see it in action!
+```
 
-Precise file paths and content, library versions and library context, code snippets examples. LLMs generate higher-quality code when given direct, in-prompt references instead of broad descriptions. Usage of a ai_docs/ directory to pipe in library and other docs.
+---
 
-## Getting Started
+## 🛠�� Available Commands
 
-### Option 1: Copy Resources to Your Existing Project
+### 📋 **PRP Creation & Execution**
+- `/prp-base-create` - Generate comprehensive PRPs with research
+- `/prp-base-execute` - Execute PRPs against codebase  
+- `/prp-planning-create` - Create planning documents with diagrams
+- `/prp-spec-create` - Advanced specification creation
+- `/prp-task-create` - Create specific development tasks
 
-1. **Copy the Claude commands** to your project:
+### 🔍 **Code Quality & Review**
+- `/review-general` - General code review
+- `/review-staged-unstaged` - Review git changes
+- `/refactor-simple` - Simple refactoring tasks
 
-   ```bash
-   # From your project root
-   cp -r /path/to/PRPs-agentic-eng/.claude/commands .claude/
-   ```
+### 🌿 **Git & GitHub Operations**
+- `/new-dev-branch` - Create development branches
+- `/smart-commit` - Intelligent commit messages
+- `/create-pr` - Create pull requests
+- `/conflict-resolver-general` - Resolve git conflicts
 
-2. **Copy the PRP templates and runner**:
+### 🚀 **Development Utilities**
+- `/prime-core` - Prime Claude with project context
+- `/onboarding` - Team member onboarding
+- `/debug-RCA` - Root cause analysis and debugging
+- `/api-contract-define` - Define API contracts
 
-   ```bash
-   cp -r /path/to/PRPs-agentic-eng/PRPs/templates PRPs/
-   cp -r /path/to/PRPs-agentic-eng/PRPs/scripts PRPs/
-   cp /path/to/PRPs-agentic-eng/PRPs/README.md PRPs/
-   ```
+### 💻 **Language-Specific**
+- `/TS-create-base-prp` - TypeScript-specific PRP creation
+- `/TS-execute-base-prp` - TypeScript PRP execution
+- `/TS-review-general` - TypeScript code review
 
-3. **Copy AI documentation** (optional but recommended):
-   ```bash
-   cp -r /path/to/PRPs-agentic-eng/PRPs/ai_docs PRPs/
-   ```
+---
 
-### Option 2: Clone and Start a New Project
+## 🎯 How to Use This Toolkit
 
-1. **Clone this repository**:
+### 1. **Planning Phase**
+```bash
+# Create high-level planning
+/prp-planning-create "Build a task management app"
 
-   ```bash
-   git clone https://github.com/Wirasm/PRPs-agentic-eng.git
-   cd PRPs-agentic-eng
-   ```
+# Generate detailed PRP
+/prp-base-create "User authentication with JWT"
+```
 
-2. **Create your project structure**:
+### 2. **Development Phase**
+```bash
+# Create development branch
+/new-dev-branch
 
-   ```bash
-   # Example for a Python project
-   mkdir -p src/tests
-   touch src/__init__.py
-   touch pyproject.toml
-   touch CLAUDE.md
-   ```
+# Execute your PRP
+/prp-base-execute PRPs/user-auth.md
 
-3. **Initialize with UV** (for Python projects):
-   ```bash
-   uv venv
-   uv sync
-   ```
+# Use Qodo AI in VS Code for implementation
+```
 
-## Using Claude Commands
+### 3. **Quality Assurance**
+```bash
+# Review your code
+/review-general
 
-The `.claude/commands/` directory contains 12 pre-configured commands that appear as slash commands in Claude Code.
+# Run validation loops from PRP
+pytest tests/ -v
+```
 
-### Available Commands
+### 4. **Deployment**
+```bash
+# Smart commit with detailed messages
+/smart-commit
 
-1. **PRP Creation & Execution**:
-   - `/create-base-prp` - Generate comprehensive PRPs with research
-   - `/execute-base-prp` - Execute PRPs against codebase
-   - `/planning-create` - Create planning documents with diagrams
-   - `/spec-create-adv` - Advanced specification creation
-   - `/spec-execute` - Execute specifications
+# Create pull request
+/create-pr
+```
 
-2. **Code Review & Refactoring**:
-   - `/review-general` - General code review
-   - `/review-staged-unstaged` - Review git changes
-   - `/refactor-simple` - Simple refactoring tasks
+---
 
-3. **Git & GitHub**:
-   - `/create-pr` - Create pull requests
+## 📖 PRP Structure & Best Practices
 
-4. **Utilities**:
-   - `/prime-core` - Prime Claude with project context
-   - `/onboarding` - Onboarding process for new team members
-   - `/debug` - Debugging workflow
-
-### How to Use Commands
-
-1. **In Claude Code**, type `/` to see available commands
-2. **Select a command** and provide arguments when prompted
-3. **Example usage**:
-   ```
-   /create-base-prp user authentication system with OAuth2
-   ```
-
-## Using PRPs
-
-### Creating a PRP
-
-1. **Use the template** as a starting point:
-
-   ```bash
-   cp PRPs/templates/prp_base.md PRPs/my-feature.md
-   ```
-
-2. **Fill in the sections**:
-   - Goal: What needs to be built
-   - Why: Business value and user impact
-   - Context: Documentation, code examples, gotchas
-   - Implementation Blueprint: Tasks and pseudocode
-   - Validation Loop: Executable tests
-
-3. **Or use Claude to generate one**:
-   ```
-   /create-base-prp implement user authentication with JWT tokens
-   ```
-
-### Executing a PRP
-
-1. **Using the runner script**:
-
-   ```bash
-   # Interactive mode (recommended for development)
-   uv run PRPs/scripts/prp_runner.py --prp my-feature --interactive
-
-   # Headless mode (for CI/CD)
-   uv run PRPs/scripts/prp_runner.py --prp my-feature --output-format json
-
-   # Streaming JSON (for real-time monitoring)
-   uv run PRPs/scripts/prp_runner.py --prp my-feature --output-format stream-json
-   ```
-
-2. **Using Claude commands**:
-   ```
-   /execute-base-prp PRPs/my-feature.md
-   ```
-
-### PRP Best Practices
-
-1. **Context is King**: Include ALL necessary documentation, examples, and caveats
-2. **Validation Loops**: Provide executable tests/lints the AI can run and fix
-3. **Information Dense**: Use keywords and patterns from the codebase
-4. **Progressive Success**: Start simple, validate, then enhance
-
-### Example PRP Structure
+### **Essential PRP Components**
 
 ```markdown
 ## Goal
+What you're building and why it matters
 
-Implement user authentication with JWT tokens
-
-## Why
-
-- Enable secure user sessions
-- Support API authentication
-- Replace basic auth with industry standard
+## Why  
+Business value and user impact
 
 ## What
-
-JWT-based authentication system with login, logout, and token refresh
-
-### Success Criteria
-
-- [ ] Users can login with email/password
-- [ ] JWT tokens expire after 24 hours
-- [ ] Refresh tokens work correctly
-- [ ] All endpoints properly secured
+Specific deliverables and success criteria
 
 ## All Needed Context
-
-### Documentation & References
-
-- url: https://jwt.io/introduction/
-  why: JWT structure and best practices
-
-- file: src/auth/basic_auth.py
-  why: Current auth pattern to replace
-
-- doc: https://fastapi.tiangolo.com/tutorial/security/oauth2-jwt/
-  section: OAuth2 with Password and JWT
-
-### Known Gotchas
-
-# CRITICAL: Use RS256 algorithm for production
-
-# CRITICAL: Store refresh tokens in httpOnly cookies
-
-# CRITICAL: Implement token blacklist for logout
+- Documentation URLs with specific sections
+- Code examples from existing codebase
+- Known gotchas and pitfalls
+- Library versions and constraints
 
 ## Implementation Blueprint
-
-[... detailed implementation plan ...]
+Step-by-step plan with pseudocode and tasks
 
 ## Validation Loop
-
-### Level 1: Syntax & Style
-
-ruff check src/ --fix
-mypy src/
-
-### Level 2: Unit Tests
-
-uv run pytest tests/test_auth.py -v
-
-### Level 3: Integration Test
-
-curl -X POST http://localhost:8000/auth/login \
- -H "Content-Type: application/json" \
- -d '{"email": "test@example.com", "password": "testpass"}'
+Executable commands for testing and validation
 ```
 
-## Project Structure Recommendations
-
-```
-your-project/
-|-- .claude/
-|   |-- commands/          # Claude Code commands
-|   `-- settings.json      # Tool permissions
-|-- PRPs/
-|   |-- templates/         # PRP templates
-|   |-- scrips/           # PRP runner
-|   |-- ai_docs/          # Library documentation
-|   |-- completed/        # Finished PRPs
-|   `-- *.md              # Active PRPs
-|-- CLAUDE.md             # Project-specific guidelines
-|-- src/                  # Your source code
-`-- tests/                # Your tests
-```
-
-## Setting Up CLAUDE.md
-
-Create a `CLAUDE.md` file in your project root with:
-
-1. **Core Principles**: KISS, YAGNI, etc.
-2. **Code Structure**: File size limits, function length
-3. **Architecture**: How your project is organized
-4. **Testing**: Test patterns and requirements
-5. **Style Conventions**: Language-specific guidelines
-6. **Development Commands**: How to run tests, lint, etc.
-
-See the example CLAUDE.md in this repository for a comprehensive template.
-
-## Advanced Usage
-
-### Running Multiple Claude Sessions
-
-Use Git worktrees for parallel development:
-
-```bash
-git worktree add -b feature-auth ../project-auth
-git worktree add -b feature-api ../project-api
-
-# Run Claude in each worktree
-cd ../project-auth && claude
-cd ../project-api && claude
-```
-
-### CI/CD Integration
-
-Use the PRP runner in headless mode:
-
-```yaml
-# GitHub Actions example
-- name: Execute PRP
-  run: |
-    uv run PRPs/scripts/prp_runner.py \
-      --prp implement-feature \
-      --output-format json > result.json
-```
-
-### Custom Commands
-
-Create your own commands in `.claude/commands/`:
-
-```markdown
-# .claude/commands/my-command.md
-
-# My Custom Command
-
-Do something specific to my project.
-
-## Arguments: $ARGUMENTS
-
-[Your command implementation]
-```
-
-## Resources Included
-
-### Documentation (PRPs/ai_docs/)
-
-- `cc_base.md` - Core Claude Code documentation
-- `cc_actions_sdk.md` - GitHub Actions and SDK integration
-- `cc_best_practices.md` - Best practices guide
-- `cc_settings.md` - Configuration and security
-- `cc_tutorials.md` - Step-by-step tutorials
-
-### Templates (PRPs/templates/)
-
-- `prp_base.md` - Comprehensive PRP template with validation
-- `prp_spec.md` - Specification template
-- `prp_planning_base.md` - Planning template with diagrams
-
-### Example PRP
-
-- `example-from-workshop-mcp-crawl4ai-refactor-1.md` - Real-world refactoring example
-
-## License
-
-MIT License
-
-## Support
-
-I spent a considerable amount of time creating these resources and prompts. If you find value in this project, please consider buying me a coffee to support my work.
-
-👉 **Buy me a coffee:** https://coff.ee/wirasm
+### **Golden Rules**
+1. **Context is King** - Include ALL necessary documentation and examples
+2. **Make it Executable** - Validation loops must be runnable by AI
+3. **Reference Reality** - Use actual file paths and code patterns
+4. **Plan for Failure** - Include error handling and edge cases
 
 ---
 
-Remember: The goal is one-pass implementation success through comprehensive context. Happy coding with Claude Code!
+## 🏗️ Project Structure
+
+```
+pompompurin-ai-toolkit/
+├── 🍮 README.md                    # You are here!
+├── ⚙️ .claude/
+│   └── commands/                   # 28+ slash commands
+│       ├── PRPs/                   # PRP creation & execution
+│       ├── code-quality/           # Review & refactoring
+│       ├── development/            # Core dev utilities
+│       ├── git-operations/         # Git workflow commands
+│       └── typescript/             # TS-specific commands
+├── 📚 PRPs/
+│   ├── templates/                  # PRP templates
+│   ├── scripts/                    # PRP runner utilities
+│   ├── ai_docs/                    # Curated AI documentation
+│   └── *.md                        # Example PRPs
+├── 🚀 task-api/                    # Complete demo project
+│   ├── app/                        # FastAPI implementation
+│   ├── tests/                      # Comprehensive test suite
+│   └── README.md                   # Project documentation
+└── 📋 CLAUDE.md                    # Project guidelines
+```
+
+---
+
+## 🎮 Demo Project: Task Management API
+
+Explore a complete implementation showcasing the PRP methodology:
+
+### **What's Included**
+- ✅ **FastAPI Backend** with JWT authentication
+- ✅ **SQLAlchemy ORM** with SQLite database
+- ✅ **Full CRUD Operations** for task management
+- ✅ **Comprehensive Test Suite** with pytest
+- ✅ **API Documentation** with OpenAPI/Swagger
+- ✅ **Production-Ready Structure** with error handling
+
+### **Try It Out**
+```bash
+cd task-api
+pip install -r requirements.txt
+uvicorn app.main:app --reload
+open http://localhost:8000/docs
+```
+
+### **Learn from the PRPs**
+- `PRPs/task-api-planning.md` - Architecture planning
+- `PRPs/task-api-core.md` - Detailed implementation PRP
+- `PRPs/task-api-contract.md` - API specification
+- `PRPs/task-api-debug.md` - Troubleshooting guide
+- `PRPs/task-api-onboarding.md` - Team onboarding
+
+---
+
+## 🔧 Integration with AI Tools
+
+### **Claude Code Integration**
+1. Open your project in Claude Code
+2. Type `/` to see available commands
+3. Use commands to create and execute PRPs
+4. Let Claude implement following your blueprints
+
+### **Qodo AI Integration**
+1. Install Qodo AI extension in VS Code
+2. Use PRPs as specifications for Qodo
+3. Generate tests with Qodo based on PRP validation loops
+4. Review Qodo's output using PRP quality criteria
+
+### **Universal Compatibility**
+Works with any AI coding assistant:
+- GitHub Copilot
+- Cursor
+- Codeium
+- And more!
+
+---
+
+## 🌍 Use Cases & Examples
+
+### **Web Applications**
+- React/Vue/Angular frontends
+- FastAPI/Django/Flask backends
+- Full-stack applications
+
+### **Mobile Development**
+- React Native apps
+- Flutter applications
+- Native iOS/Android
+
+### **Data & AI Projects**
+- Machine learning pipelines
+- Data analysis workflows
+- AI model deployment
+
+### **Infrastructure & DevOps**
+- Cloud deployments
+- CI/CD pipelines
+- Monitoring systems
+
+### **Games & Interactive Media**
+- Web games
+- Game development tools
+- Interactive visualizations
+
+---
+
+## 📚 Learning Resources
+
+### **Getting Started**
+1. **Read the Demo PRPs** - See real-world examples
+2. **Try the Task API** - Hands-on experience
+3. **Create Your First PRP** - Start small and iterate
+4. **Join the Community** - Share your experiences
+
+### **Advanced Topics**
+- **Custom Command Creation** - Extend the toolkit
+- **Team Workflows** - Scale across organizations
+- **CI/CD Integration** - Automate PRP execution
+- **Multi-Agent Coordination** - Complex project management
+
+### **Best Practices**
+- **Context Engineering** - Maximize AI effectiveness
+- **Validation Strategies** - Ensure production quality
+- **Documentation Patterns** - Maintainable knowledge
+- **Security Considerations** - Safe AI development
+
+---
+
+## 🤝 Contributing
+
+We love contributions! Here's how to get involved:
+
+### **Ways to Contribute**
+- 🐛 **Report Bugs** - Help us improve
+- 💡 **Suggest Features** - Share your ideas
+- 📝 **Improve Documentation** - Make it clearer
+- 🔧 **Add Commands** - Extend functionality
+- 🎯 **Share PRPs** - Real-world examples
+
+### **Getting Started**
+```bash
+# Fork the repository
+git clone https://github.com/your-username/pompompurin-ai-toolkit.git
+
+# Create a feature branch
+git checkout -b feature/amazing-new-command
+
+# Make your changes and test
+# Follow the PRP methodology for new features!
+
+# Submit a pull request
+```
+
+### **Contribution Guidelines**
+1. **Follow PRP Methodology** - Use our own tools!
+2. **Include Tests** - Validate your contributions
+3. **Update Documentation** - Keep it current
+4. **Be Respectful** - Kind and constructive feedback
+
+---
+
+## 📄 License
+
+MIT License - see [LICENSE](LICENSE) file for details.
+
+### **What This Means**
+- ✅ **Free to use** for personal and commercial projects
+- ✅ **Modify and distribute** as needed
+- ✅ **No warranty** - use at your own risk
+- ✅ **Attribution appreciated** but not required
+
+---
+
+## 🙏 Acknowledgments
+
+### **Special Thanks**
+- **Rasmus Widing** - Original PRP methodology creator
+- **Claude AI** - Powering the development experience
+- **Qodo AI** - Enhancing code generation capabilities
+- **The Community** - Feedback, contributions, and support
+
+### **Inspiration**
+This toolkit was inspired by the need for structured, context-rich AI development that produces production-ready code. The PRP methodology bridges the gap between traditional requirements and AI-assisted implementation.
+
+---
+
+## 📞 Support & Community
+
+### **Get Help**
+- 📖 **Documentation** - Check the PRPs and guides
+- 🐛 **Issues** - Report bugs on GitHub
+- 💬 **Discussions** - Join community conversations
+- 📧 **Direct Contact** - Reach out for complex questions
+
+### **Stay Updated**
+- ⭐ **Star the Repository** - Get notified of updates
+- 👀 **Watch Releases** - New features and improvements
+- 🐦 **Follow Updates** - Social media announcements
+
+### **Support the Project**
+If you find this toolkit valuable:
+
+- ⭐ **Star the repository** - Show your support
+- 🔄 **Share with others** - Spread the word
+- 💝 **Contribute** - Make it even better
+- ☕ **Buy me a coffee** - [Support the maintainer](https://coff.ee/wirasm)
+
+---
+
+## 🎉 Ready to Build Something Amazing?
+
+The PompomPurin AI Engineering Toolkit is your gateway to **sweet, efficient, and production-ready AI development**. Whether you're building your first app or scaling enterprise systems, our PRP methodology and comprehensive command library will help you succeed.
+
+### **Start Your Journey**
+```bash
+git clone https://github.com/pompompurin/pompompurin-ai-toolkit.git
+cd pompompurin-ai-toolkit
+# Open in Claude Code and type "/" to see the magic! ✨
+```
+
+**Happy coding, and may your development be as smooth as pudding!** 🍮💻✨
+
+---
+
+*Made with 💖 and lots of ☕ by the PompomPurin community*
