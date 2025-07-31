@@ -1,0 +1,147 @@
+{
+  "name": "PompomPurin AI Toolkit Dev Environment",
+  "dockerComposeFile": "../docker-compose.modern.yml",
+  "service": "app",
+  "workspaceFolder": "/app",
+  
+  // Features to install in the container
+  "features": {
+    "ghcr.io/devcontainers/features/git:1": {},
+    "ghcr.io/devcontainers/features/github-cli:1": {},
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {},
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "20"
+    }
+  },
+
+  // VS Code extensions to install
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        // Python development
+        "ms-python.python",
+        "ms-python.mypy-type-checker",
+        "charliermarsh.ruff",
+        
+        // AI coding assistants
+        "qodo.qodo",
+        "github.copilot",
+        "github.copilot-chat",
+        
+        // Docker and containers
+        "ms-azuretools.vscode-docker",
+        "ms-vscode-remote.remote-containers",
+        
+        // Git and GitHub
+        "github.vscode-pull-request-github",
+        "eamodio.gitlens",
+        
+        // General productivity
+        "ms-vscode.vscode-json",
+        "redhat.vscode-yaml",
+        "ms-vscode.vscode-typescript-next",
+        "bradlc.vscode-tailwindcss",
+        
+        // Testing
+        "ms-python.pytest",
+        "hbenl.vscode-test-explorer",
+        
+        // Monitoring and observability
+        "ms-vscode.vscode-prometheus",
+        "grafana.vscode-jsonnet"
+      ],
+      
+      "settings": {
+        // Python settings
+        "python.defaultInterpreterPath": "/opt/conda/bin/python",
+        "python.linting.enabled": true,
+        "python.linting.ruffEnabled": true,
+        "python.formatting.provider": "none",
+        "python.testing.pytestEnabled": true,
+        "python.testing.unittestEnabled": false,
+        
+        // Ruff settings (replaces black, isort, flake8)
+        "[python]": {
+          "editor.formatOnSave": true,
+          "editor.codeActionsOnSave": {
+            "source.organizeImports": true,
+            "source.fixAll": true
+          },
+          "editor.defaultFormatter": "charliermarsh.ruff"
+        },
+        
+        // File associations
+        "files.associations": {
+          "*.md": "markdown",
+          "Dockerfile*": "dockerfile",
+          "docker-compose*.yml": "dockercompose"
+        },
+        
+        // Terminal settings
+        "terminal.integrated.defaultProfile.linux": "bash",
+        "terminal.integrated.profiles.linux": {
+          "bash": {
+            "path": "/bin/bash"
+          }
+        },
+        
+        // Git settings
+        "git.autofetch": true,
+        "git.enableSmartCommit": true,
+        
+        // Editor settings
+        "editor.rulers": [88],
+        "editor.tabSize": 4,
+        "editor.insertSpaces": true,
+        "files.trimTrailingWhitespace": true,
+        "files.insertFinalNewline": true
+      }
+    }
+  },
+
+  // Commands to run after container creation
+  "postCreateCommand": "bash .devcontainer/post-create.sh",
+  
+  // Commands to run when attaching to container
+  "postAttachCommand": "echo 'Welcome to PompomPurin AI Toolkit! 🍮'",
+
+  // Port forwarding
+  "forwardPorts": [8000, 5432, 6379, 3000, 9090, 16686],
+  "portsAttributes": {
+    "8000": {
+      "label": "FastAPI App",
+      "onAutoForward": "notify"
+    },
+    "5432": {
+      "label": "PostgreSQL"
+    },
+    "6379": {
+      "label": "Redis"
+    },
+    "3000": {
+      "label": "Grafana"
+    },
+    "9090": {
+      "label": "Prometheus"
+    },
+    "16686": {
+      "label": "Jaeger UI"
+    }
+  },
+
+  // Mount the Docker socket for Docker-in-Docker
+  "mounts": [
+    "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind"
+  ],
+
+  // Environment variables
+  "containerEnv": {
+    "DOCKER_BUILDKIT": "1",
+    "COMPOSE_DOCKER_CLI_BUILD": "true",
+    "PYTHONPATH": "/app"
+  },
+
+  // User settings
+  "remoteUser": "vscode",
+  "updateRemoteUserUID": true
+}

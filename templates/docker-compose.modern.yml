@@ -1,0 +1,163 @@
+# Modern Docker Compose with BuildKit and performance optimizations
+version: '3.8'
+
+# Enable BuildKit for faster builds
+x-build-args: &build-args
+  BUILDKIT_INLINE_CACHE: 1
+  DOCKER_BUILDKIT: 1
+
+services:
+  # Main application service
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile.modern
+      target: development
+      cache_from:
+        - ${REGISTRY:-localhost}/app:latest
+        - ${REGISTRY:-localhost}/app:cache
+      args:
+        <<: *build-args
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=postgresql://postgres:password@db:5432/app
+      - REDIS_URL=redis://redis:6379/0
+      - SENTRY_DSN=${SENTRY_DSN:-}
+    volumes:
+      # Hot reload for development
+      - .:/app
+      - /app/.venv  # Exclude virtual environment
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - app-network
+    restart: unless-stopped
+
+  # Database service
+  db:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_DB: app
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./scripts/init-db.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - app-network
+    restart: unless-stopped
+
+  # Redis for caching and sessions
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - app-network
+    restart: unless-stopped
+
+  # Monitoring with Prometheus
+  prometheus:
+    image: prom/prometheus:latest
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus_data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/etc/prometheus/console_libraries'
+      - '--web.console.templates=/etc/prometheus/consoles'
+      - '--web.enable-lifecycle'
+    networks:
+      - app-network
+    restart: unless-stopped
+
+  # Grafana for visualization
+  grafana:
+    image: grafana/grafana:latest
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./monitoring/grafana/dashboards:/etc/grafana/provisioning/dashboards
+      - ./monitoring/grafana/datasources:/etc/grafana/provisioning/datasources
+    networks:
+      - app-network
+    restart: unless-stopped
+
+  # Jaeger for distributed tracing
+  jaeger:
+    image: jaegertracing/all-in-one:latest
+    ports:
+      - "16686:16686"
+      - "14268:14268"
+    environment:
+      - COLLECTOR_OTLP_ENABLED=true
+    networks:
+      - app-network
+    restart: unless-stopped
+
+# Production override
+  app-prod:
+    build:
+      target: production
+    environment:
+      - ENV=production
+      - DATABASE_URL=${DATABASE_URL}
+      - REDIS_URL=${REDIS_URL}
+      - SENTRY_DSN=${SENTRY_DSN}
+    profiles:
+      - production
+
+# Testing services
+  test:
+    build:
+      target: testing
+    volumes:
+      - .:/app
+    command: pytest tests/ -v --cov=app --cov-report=html
+    profiles:
+      - testing
+
+  lint:
+    build:
+      target: linting
+    volumes:
+      - .:/app
+    profiles:
+      - linting
+
+volumes:
+  postgres_data:
+  redis_data:
+  prometheus_data:
+  grafana_data:
+
+networks:
+  app-network:
+    driver: bridge
+
+# Development overrides
+# Usage: COMPOSE_BAKE=true docker-compose -f docker-compose.yml -f docker-compose.override.yml up
